@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useEffect} from 'react';
+import {useState} from 'react';
+import { listaDiscos } from "../servicios/DiscoServicio";
 
 const ComponenteDisco = () => {
-    const dummyData = [
+    /*const dummyData = [
         {"id": 1,
         "artista": "artista1",
         "titulo": "el mejor disco",
@@ -48,8 +50,16 @@ const ComponenteDisco = () => {
         "cod": "tcl456"
     }
 
-    ]
+    ]*/
+    const [disco, setDisco] = useState([]);
 
+    useEffect(() => {
+        listaDiscos().then((respuesta) => {
+            setDisco(respuesta.data);
+        }).catch(error => {
+            console.error(error)
+        })
+    }, [])
   return (
     <div>
         <table className="table-auto border-collapse border">
@@ -66,7 +76,7 @@ const ComponenteDisco = () => {
             <tbody>
                 
                 {
-                    dummyData.map(disco =>
+                    disco.map(disco =>
                         <tr key={disco.id}>
                             <td className='border border-slate-300'>{disco.id}</td>
                             <td className='border border-slate-300'>{disco.artista}</td>       
