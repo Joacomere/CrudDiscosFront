@@ -52,15 +52,15 @@ const ComponenteDisco = () => {
 
   return (
     <div>
-        <table className="table-auto">
+        <table className="table-auto border-collapse border">
             <thead>
                 <tr>
                     
-                    <th>Id</th>    
-                    <th>Artista</th>
-                    <th>Titulo</th>
-                    <th>Duracion</th>
-                    <th>Codigo</th>
+                    <th className='border border-slate-300'>Id</th>    
+                    <th className='border border-slate-300'>Artista</th>
+                    <th className='border border-slate-300'>Titulo</th>
+                    <th className='border border-slate-300'>Duracion</th>
+                    <th className='border border-slate-300'>Codigo</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,11 +68,11 @@ const ComponenteDisco = () => {
                 {
                     dummyData.map(disco =>
                         <tr key={disco.id}>
-                            <td>{disco.id}</td>
-                            <td>{disco.artista}</td>       
-                            <td>{disco.titulo}</td>
-                            <td>{disco.duracion}</td>
-                            <td>{disco.cod}</td>
+                            <td className='border border-slate-300'>{disco.id}</td>
+                            <td className='border border-slate-300'>{disco.artista}</td>       
+                            <td className='border border-slate-300'>{disco.titulo}</td>
+                            <td className='border border-slate-300'>{disco.duracion}</td>
+                            <td className='border border-slate-300'>{disco.cod}</td>
                         </tr>
                     )
                 }    
