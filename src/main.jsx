@@ -10,6 +10,7 @@ import Footer from './componentes/Footer.jsx'
 import Home from './componentes/Home.jsx'
 import Info from './componentes/Info.jsx'
 import Proximamente from './componentes/Proximamente.jsx'
+import ComponenteDisco from './componentes/ComponenteDisco.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,12 @@ const router = createBrowserRouter([
     path:"/Proximamente",
       element:<Proximamente />,
       errorElement: (<div>Error, esto está mal</div>),
-  }  
+  },
+  {
+    path: "/agrega-disco",
+    element: <ComponenteDisco/>,
+    errorElement: (<div> no se puede agregar</div>),
+  } 
 ]);
 
 

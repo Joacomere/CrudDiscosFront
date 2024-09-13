@@ -1,96 +1,64 @@
-import React,{useEffect} from 'react';
-import {useState} from 'react';
-import { listaDiscos } from "../servicios/DiscoServicio";
+import React, { useState } from 'react'
+import {guardaDiscoServicio} from '../servicios/DiscoServicio'
+import { useNavigate } from 'react-router-dom'
 
-const ComponenteDisco = () => {
-    /*const dummyData = [
-        {"id": 1,
-        "artista": "artista1",
-        "titulo": "el mejor disco",
-        "duracion": 30,
-        "cod": "abc123"
+export default function ComponenteDisco() {
 
-    },
-    {
-        "id": 2,
-        "artista": "artista 2",
-        "titulo": "disco no tan bueno",
-        "duracion": 30,
-        "cod": "bca123"
-    },
-    {
-        "id": 3,
-        "artista": "artista 3",
-        "titulo": "disco mediocre",
-        "duracion": 45,
-        "cod": "acd321"
-    },{
-        "id": 4,
-        "artista": "artista 4",
-        "titulo": "disco asombroso",
-        "duracion": 50,
-        "cod": "owa345"
-    },{
-        "id": 5,
-        "artista": "artista 5",
-        "titulo": "disco regular",
-        "duracion": 55,
-        "cod": "lsd666"
-    },{
-        "id": 6,
-        "artista": "artista 6",
-        "titulo": "disco bombastico",
-        "duracion": 60,
-        "cod": "awa589"
-    },{
-        "id": 7,
-        "artista": "artista 7",
-        "titulo": "disco exitoso",
-        "duracion": 65,
-        "cod": "tcl456"
-    }
+    const [artista, setArtista]=useState('')
+    const [titulo, setTitulo]=useState('')
+    const [duracion, setDuracion]=useState('')
+    const [cod, setCodigo]=useState('')
+    const navegador = useNavigate()
 
-    ]*/
-    const [disco, setDisco] = useState([]);
+     function guardaDisco(e){
+        e.preventDefault();
+        const disco = {titulo,artista,cod,duracion}
+        console.log(disco)
 
-    useEffect(() => {
-        listaDiscos().then((respuesta) => {
-            setDisco(respuesta.data);
-        }).catch(error => {
-            console.error(error)
+        guardaDiscoServicio(disco).then((respuesta) =>{
+            console.log(respuesta.data);
+            navegador('/discos')
         })
-    }, [])
+    }
+    
   return (
     <div>
-        <table className="table-auto border-collapse border">
-            <thead>
-                <tr>
-                    
-                    <th className='border border-slate-300'>Id</th>    
-                    <th className='border border-slate-300'>Artista</th>
-                    <th className='border border-slate-300'>Titulo</th>
-                    <th className='border border-slate-300'>Duracion</th>
-                    <th className='border border-slate-300'>Codigo</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                {
-                    disco.map(disco =>
-                        <tr key={disco.id}>
-                            <td className='border border-slate-300'>{disco.id}</td>
-                            <td className='border border-slate-300'>{disco.artista}</td>       
-                            <td className='border border-slate-300'>{disco.titulo}</td>
-                            <td className='border border-slate-300'>{disco.duracion}</td>
-                            <td className='border border-slate-300'>{disco.cod}</td>
-                        </tr>
-                    )
-                }    
-                   
-            
-            </tbody>
-        </table>            
+        <h2>Agregar Disco</h2>
+        <form>
+            <label>Artista:</label>
+            <input type='text' 
+                placeholder='ingrese artista'
+                name = 'artista'
+                value= {artista}
+                onChange={(e) => setArtista(e.target.value)}>
+
+            </input>
+            <label>Titulo:</label>
+            <input type='text' 
+                placeholder='ingrese titulo'
+                name = 'titulo '
+                value= {titulo}
+                onChange={(e) => setTitulo(e.target.value)}>
+
+            </input>
+            <label>Duración:</label>
+            <input type='text' 
+                placeholder='ingrese duracion'
+                name = 'duración '
+                value= {duracion}
+                onChange={(e) => setDuracion(e.target.value)}>
+
+            </input>
+            <label>Codigo:</label>
+            <input type='text' 
+                placeholder='ingrese codigo'
+                name = 'codigo '
+                value= {cod}
+                onChange={(e) => setCodigo(e.target.value)}>
+
+            </input>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={guardaDisco}>Agregar</button>
+        </form>
     </div>
   )
 }
-export default ComponenteDisco

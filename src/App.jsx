@@ -1,4 +1,4 @@
-import ComponenteDisco from "./componentes/ComponenteDisco"
+import ComponenteListaDiscos from "./componentes/ComponenteListaDiscos"
 
 function App() {
  
@@ -6,7 +6,7 @@ function App() {
   return (
     <>
     
-      <ComponenteDisco/>
+      <ComponenteListaDiscos/>
      
     </>
   )

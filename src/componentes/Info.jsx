@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Info() {
   return (
-    <div>Hola, que tal?</div>
+    <div>Esta es una página para buscar discos</div>
   )
 }
