@@ -39,7 +39,12 @@ const router = createBrowserRouter([
     path: "/agrega-disco",
     element: <ComponenteDisco/>,
     errorElement: (<div> no se puede agregar</div>),
-  } 
+  } ,
+  {
+    path: "/actualiza-disco/:id" ,/*Los : sirven para definirlo como ruta dinamica*/
+    element:<ComponenteDisco/>,
+    errorElement: (<div>no se puede editar</div>)
+  }
 ]);
 
 

@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import {useState} from 'react';
-import { listaDiscos } from "../servicios/DiscoServicio";
+import { borraDisco, listaDiscos } from "../servicios/DiscoServicio";
 import {useNavigate} from 'react-router-dom'
 
 const ComponenteListaDiscos = () => {
@@ -56,14 +56,30 @@ const ComponenteListaDiscos = () => {
     const navegador = useNavigate();
 
     useEffect(() => {
+        traeTodosLosDiscos()
+    }, [])
+
+    function traeTodosLosDiscos(){
         listaDiscos().then((respuesta) => {
             setDisco(respuesta.data);
         }).catch(error => {
             console.error(error)
         })
-    }, [])
+    }
     function agregarDisco(){
         navegador('/agrega-disco')
+    }
+    //Los acentos invertidos nos permiten agregar codigo dentro de una cadena de caracteres
+    function actualizaDisco(id){
+        navegador(`/actualiza-disco/${id}`)
+    }
+    function quitaDisco(id){
+        console.log(id);
+        borraDisco(id).then((respuesta) => {
+            traeTodosLosDiscos()
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
   return (
@@ -78,6 +94,7 @@ const ComponenteListaDiscos = () => {
                     <th className='border border-slate-300'>Titulo</th>
                     <th className='border border-slate-300'>Duracion</th>
                     <th className='border border-slate-300'>Codigo</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,6 +107,10 @@ const ComponenteListaDiscos = () => {
                             <td className='border border-slate-300'>{disco.titulo}</td>
                             <td className='border border-slate-300'>{disco.duracion}</td>
                             <td className='border border-slate-300'>{disco.cod}</td>
+                            <td>
+                                <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => actualizaDisco(disco.id)}>Actualizar</button>
+                                <button class="bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => quitaDisco(disco.id)}>Borrar</button>                            
+                            </td>
                         </tr>
                     )
                 }    
